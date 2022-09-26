@@ -30,6 +30,10 @@ public class BookService {
 
     }
 
+    public List<Book> saveAll(List<Book> books) {
+        return bookRepo.saveAll(books);
+    }
+
     public Book update(Book book) {
         Book book1 = findById(book.getId());
         book1.setName(book.getName());

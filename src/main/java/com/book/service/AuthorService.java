@@ -30,6 +30,10 @@ public class AuthorService {
 
     }
 
+    public List<Author> saveAll(List<Author> authors) {
+        return authorRepo.saveAll(authors);
+    }
+
     public Author update(Author author) {
         Author author1 = findById(author.getId());
         author1.setName(author.getName());

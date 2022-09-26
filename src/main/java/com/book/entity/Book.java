@@ -20,7 +20,7 @@ public class Book {
 
     private Double salary;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Author author;
 }
