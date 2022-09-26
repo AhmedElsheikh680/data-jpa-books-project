@@ -1,6 +1,7 @@
 package com.book.controller;
 
 
+import com.book.dto.BookDTO;
 import com.book.entity.Book;
 import com.book.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,14 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(bookService.findById(id));
+      Book book =   bookService.findById(id);
+      BookDTO bookDTO = new BookDTO();
+      bookDTO.setId(book.getId());
+      bookDTO.setName(book.getName());
+      bookDTO.setSalary(book.getSalary());
+      bookDTO.setAuthor(book.getAuthor());
+
+      return ResponseEntity.ok(bookDTO);
     }
 
     @GetMapping("")
