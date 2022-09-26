@@ -16,6 +16,6 @@ public interface BookRepo extends JpaRepository<Book, Long> {
     Optional<Book> findById(Long aLong);
 
     @Override
-    @EntityGraph(attributePaths = {"author"})
+    @EntityGraph(value = "loadAuthor")
     List<Book> findAll();
 }

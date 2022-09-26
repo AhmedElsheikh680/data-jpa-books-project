@@ -10,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
+@NamedEntityGraph(name = "loadAuthor", attributeNodes = @NamedAttributeNode("author"))
 public class Book {
 
     @Id
