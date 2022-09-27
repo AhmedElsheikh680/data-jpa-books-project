@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Formula;
-
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 
 @NoArgsConstructor
@@ -13,21 +13,22 @@ import javax.persistence.*;
 @Data
 @Entity
 @NamedEntityGraph(name = "loadAuthor", attributeNodes = @NamedAttributeNode("author"))
-public class Book {
+@EntityListeners({AuditingEntityListener.class})
+public class Book extends BaseEntity<Long>{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String name;
 
     private Double salary;
+
 
     @Transient
     private double discount;
 
     @Formula("(select count(*) from book)")
     private Long bookCount;
+
+
 
 
     public Long getBookCount() {
