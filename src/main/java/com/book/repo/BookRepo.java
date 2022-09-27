@@ -26,4 +26,6 @@ public interface BookRepo extends BaseRepo<Book, Long> {
     @Modifying
     @Query(value = "delete from Book b where b.author.id= :id")
     int deletebyAuthorId(Long id);
+
+
 }

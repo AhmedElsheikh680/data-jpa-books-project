@@ -16,4 +16,8 @@ public class AuthorSearch {
     private String email;
 
     private String ipAddress;
+
+    private String bookName;
+
+    private Double salary;
 }
