@@ -2,6 +2,7 @@ package com.book.controller;
 
 
 import com.book.entity.Author;
+import com.book.entity.AuthorSearch;
 import com.book.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,11 @@ public class AuthorController {
     @GetMapping("/author")
     public ResponseEntity<?> findAll() {
         return ResponseEntity.ok(authorService.findAll());
+    }
+
+    @PostMapping("author-specification")
+    public ResponseEntity<?> findByAuthorSpecification(@RequestBody AuthorSearch authorSearch) {
+        return ResponseEntity.ok(authorService.findByAuthorSpecification(authorSearch));
     }
 
     @PostMapping("/author")

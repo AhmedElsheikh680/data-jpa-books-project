@@ -1,6 +1,7 @@
 package com.book.entity;
 
 
+import com.book.validator.IpAddress;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +31,8 @@ public class Author extends BaseEntity<Long> {
     @NotBlank
     private String name;
 
-    @Pattern(regexp = "^([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})$")
+//    @Pattern(regexp = "^([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})$")
+    @IpAddress(message = "Enter Valid ip-address")
     private String ipAddress;
 
     @Email
