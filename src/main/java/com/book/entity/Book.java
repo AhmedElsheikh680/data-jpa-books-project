@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Formula;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,9 +17,13 @@ import javax.persistence.*;
 @EntityListeners({AuditingEntityListener.class})
 public class Book extends BaseEntity<Long>{
 
-
+    @NotNull
+    @NotEmpty(message = "You Must Enter Book Name")
+    @NotBlank
     private String name;
 
+    @Min(value = 5)
+    @Max(value = 500)
     private Double salary;
 
 
@@ -39,6 +44,7 @@ public class Book extends BaseEntity<Long>{
         this.bookCount = bookCount;
     }
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     @JsonBackReference

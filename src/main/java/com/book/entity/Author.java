@@ -13,6 +13,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,26 +25,27 @@ import java.util.List;
 @EntityListeners({AuditingEntityListener.class})
 public class Author extends BaseEntity<Long> {
 
-
-
+    @NotNull
+    @NotEmpty(message = "You Must Enter Author Name")
+    @NotBlank
     private String name;
 
+    @Pattern(regexp = "^([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})$")
+    private String ipAddress;
 
-    @Formula("(select count(*) from book b where b.author_id = id)")
-    private Long bookCount;
+    @Email
+    private String email;
 
 
-    @OneToMany(mappedBy = "author")
+//    @Formula("(select count(*) from book b where b.author_id = id)")
+//    private Long bookCount;
+
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Book> books = new ArrayList<>();
 
-    public long getBookCount() {
-        return bookCount;
-    }
 
-    public void setBookCount(long bookCount) {
-        this.bookCount = bookCount;
-    }
 
     //Create Helper Method (add-delete) instrad of getter wi setter
     public void addBook(Book book) {
