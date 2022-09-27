@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BookRepo extends JpaRepository<Book, Long> {
+public interface BookRepo extends BaseRepo<Book, Long> {
 
     @Override
     @EntityGraph(attributePaths = {"author"})

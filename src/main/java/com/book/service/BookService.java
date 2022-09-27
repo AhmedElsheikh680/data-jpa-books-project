@@ -9,26 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BookService {
+public class BookService extends BaseService<Book, Long> {
 
     @Autowired
     private BookRepo bookRepo;
 
-    public Book findById(Long id) {
-        return bookRepo.findById(id).orElseThrow();
-    }
-
-    public List<Book> findAll() {
-        return bookRepo.findAll();
-    }
-
-    public Book save(Book book) {
-        if (book.getId() != null) {
-            throw  new RuntimeException();
-        }
-        return bookRepo.save(book);
-
-    }
 
     public List<Book> saveAll(List<Book> books) {
         return bookRepo.saveAll(books);
@@ -38,12 +23,9 @@ public class BookService {
         Book book1 = findById(book.getId());
         book1.setName(book.getName());
 
-        return bookRepo.save(book1);
+        return update(book1);
     }
 
-    public void delete(Long id) {
-        bookRepo.deleteById(id);
-    }
 
     public int deleteByAuthorId(Long id) {
         return bookRepo.deletebyAuthorId(id);
