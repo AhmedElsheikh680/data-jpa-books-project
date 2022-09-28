@@ -22,7 +22,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @GetMapping("/author/{id}")
-    public ResponseEntity<?> findById(@PathVariable @Min(value = 5) @Max(value = 100) Long id) {
+    public ResponseEntity<?> findById(@PathVariable  Long id) {
 
         return ResponseEntity.ok(authorService.findById(id));
     }
