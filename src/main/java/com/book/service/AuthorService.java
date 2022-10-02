@@ -9,10 +9,12 @@ import com.book.repo.AuthorRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class AuthorService extends BaseService<Author, Long> {
@@ -25,10 +27,12 @@ public class AuthorService extends BaseService<Author, Long> {
     @Override
     public Author save(Author author) {
         if (!author.getEmail().isEmpty() || author.getEmail()!=null) {
-            Optional<Author> author1 = findByEmail(author.getEmail());
+//            Optional<Author> author1 = findByEmail(author.getEmail());
+            CompletableFuture<Author> author1 = findByEmail(author.getEmail());
 
             logger.info("Author Name Is {} And Email Is {}", author.getName(), author.getEmail());
-            if (author1.isPresent()) {
+//            if (author1.isPresent()) {
+            if (author1.isDone()) {
                 logger.error("This Email Already Exist!!");
                 throw new DuplicateRecordException("This Email Already Exist!!");
             }
@@ -48,7 +52,11 @@ public class AuthorService extends BaseService<Author, Long> {
         return authorRepo.findAll(autherSpecification);
    }
 
-   public Optional<Author> findByEmail(String email) {
-        return authorRepo.findByEmail(email);
-   }
+//   public Optional<Author> findByEmail(String email) {
+//        return authorRepo.findByEmail(email);
+//   }
+    @Async(value = "threadPoolTaskExecutor")
+public CompletableFuture<Author> findByEmail(String email) {
+    return CompletableFuture.completedFuture(authorRepo.findByEmail(email).get());
+}
 }

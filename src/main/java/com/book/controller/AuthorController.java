@@ -32,6 +32,11 @@ public class AuthorController {
         return ResponseEntity.ok(authorService.findAll());
     }
 
+    @GetMapping("/author/{email}")
+    public ResponseEntity<?> findByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(authorService.findByEmail(email));
+    }
+
     @PostMapping("author-specification")
     public ResponseEntity<?> findByAuthorSpecification(@RequestBody AuthorSearch authorSearch) {
         return ResponseEntity.ok(authorService.findByAuthorSpecification(authorSearch));
