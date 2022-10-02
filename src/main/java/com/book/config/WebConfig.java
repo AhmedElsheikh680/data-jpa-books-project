@@ -1,6 +1,8 @@
 package com.book.config;
 
 
+import org.flywaydb.core.Flyway;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -14,10 +16,17 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 
 public class WebConfig implements WebMvcConfigurer {
+
+    	@Autowired
+    public void WebConfig(DataSource dataSource) {
+        Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
+    }
 
     @Bean
     AuditorAware<String> auditorAware() {

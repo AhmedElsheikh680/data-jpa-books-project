@@ -24,13 +24,13 @@ public class StartupApp implements CommandLineRunner {
         if (authorService.findAll().isEmpty()) {
             //Adding Some Data For Author
             Author author = new Author();
-            author.setName("Ahmed");
+            author.setFullName("Ahmed");
 
             Author author2 = new Author();
-            author2.setName("Mohamed");
+            author2.setFullName("Mohamed");
 
             Author author3 = new Author();
-            author3.setName("Ali");
+            author3.setFullName("Ali");
 
             authorService.saveAll(Arrays.asList(author, author2, author3));
         }

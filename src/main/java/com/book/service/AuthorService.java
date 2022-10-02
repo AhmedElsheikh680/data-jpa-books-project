@@ -30,7 +30,7 @@ public class AuthorService extends BaseService<Author, Long> {
 //            Optional<Author> author1 = findByEmail(author.getEmail());
             CompletableFuture<Author> author1 = findByEmail(author.getEmail());
 
-            logger.info("Author Name Is {} And Email Is {}", author.getName(), author.getEmail());
+            logger.info("Author Name Is {} And Email Is {}", author.getFullName(), author.getEmail());
 //            if (author1.isPresent()) {
             if (author1.isDone()) {
                 logger.error("This Email Already Exist!!");
@@ -43,7 +43,7 @@ public class AuthorService extends BaseService<Author, Long> {
     @Override
     public Author update(Author author) {
       Author author1 =   findById(author.getId());
-      author1.setName(author.getName());
+      author1.setFullName(author.getFullName());
         return super.update(author1);
     }
 

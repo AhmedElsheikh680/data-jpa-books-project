@@ -33,7 +33,7 @@ public class Author extends BaseEntity<Long> {
     @NotNull
     @NotEmpty(message = "You Must Enter Author Name")
     @NotBlank
-    private String name;
+    private String fullName;
 
 //    @Pattern(regexp = "^([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})$")
     @IpAddress(message = "Enter Valid ip-address")
