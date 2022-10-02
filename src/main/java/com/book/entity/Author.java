@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Formula;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -26,6 +28,8 @@ import java.util.List;
 @EntityListeners({AuditingEntityListener.class})
 public class Author extends BaseEntity<Long> {
 
+
+
     @NotNull
     @NotEmpty(message = "You Must Enter Author Name")
     @NotBlank
@@ -35,7 +39,7 @@ public class Author extends BaseEntity<Long> {
     @IpAddress(message = "Enter Valid ip-address")
     private String ipAddress;
 
-    @Email
+    @Email(message = "{validation.constraints.email.message}")
     private String email;
 
 

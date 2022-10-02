@@ -14,7 +14,7 @@ import java.util.List;
 )
 public @interface IpAddress {
 
-    String message() default "{validation.constraints.ip-address.message}";
+    String message() default "{validation.constraints.email.message}";
 
     Class<?>[] groups() default {};
 
