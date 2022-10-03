@@ -1,6 +1,13 @@
 package com.book.config;
 
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.profile.internal.ProfileKeyConstants;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -22,6 +29,8 @@ import javax.sql.DataSource;
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 
 public class WebConfig implements WebMvcConfigurer {
+
+
 
     	@Autowired
     public void WebConfig(DataSource dataSource) {

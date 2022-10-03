@@ -32,6 +32,11 @@ public class BaseService<T extends BaseEntity<ID>, ID extends Number> {
         }
     }
 
+    public T getById(ID id) {
+
+        return baseRepo.getReferenceById(id);
+    }
+
     public List<T> findAll() {
         return baseRepo.findAll();
     }

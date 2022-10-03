@@ -46,6 +46,8 @@ public class Author extends BaseEntity<Long> {
 //    @Formula("(select count(*) from book b where b.author_id = id)")
 //    private Long bookCount;
 
+    private String imagePath;
+
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     @JsonManagedReference
