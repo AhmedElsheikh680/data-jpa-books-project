@@ -1,4 +1,4 @@
-package com.book.config;
+package com.book.swaggerconfig;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.Components;
