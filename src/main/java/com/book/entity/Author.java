@@ -3,6 +3,7 @@ package com.book.entity;
 
 import com.book.validator.IpAddress;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ import java.util.List;
 @Data
 @Entity
 @EntityListeners({AuditingEntityListener.class})
+@Schema(name = "Author Entity")
 public class Author extends BaseEntity<Long> {
 
 
