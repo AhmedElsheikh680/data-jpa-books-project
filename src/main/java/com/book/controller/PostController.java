@@ -31,8 +31,8 @@ public class PostController {
 
     @PutMapping("")
     public ResponseEntity<?> updatePost(@RequestBody PostDTO postDTO) {
-        postService.updatePost(postDTO);
-        return ResponseEntity.ok(null);
+
+        return ResponseEntity.ok(postService.updatePost(postDTO));
     }
 
 
