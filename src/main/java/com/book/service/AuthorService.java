@@ -9,6 +9,9 @@ import com.book.repo.AuthorRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,19 @@ public class AuthorService extends BaseService<Author, Long> {
     private AuthorRepo authorRepo;
 
     @Override
+    @Cacheable(value = "findAllAuthorCache", key = "#root.methodName")
+    public List<Author> findAll() {
+        return super.findAll();
+    }
+
+    @Override
+    @Cacheable(value = "findByIdAuthorCache", key = "#id")
+    public Author findById(Long id) {
+        return super.findById(id);
+    }
+
+    @Override
+    @CacheEvict(value = "{findAllAuthorCache, findByIdAuthorCache, findByEmailCache}", key = "#root.methodName", allEntries = true)
     public Author save(Author author) {
         if (!author.getEmail().isEmpty() || author.getEmail()!=null) {
 //            Optional<Author> author1 = findByEmail(author.getEmail());
@@ -41,6 +57,8 @@ public class AuthorService extends BaseService<Author, Long> {
     }
 
     @Override
+    @CacheEvict(value = "{findAllAuthorCache, findByIdAuthorCache, findByEmailCache}", key="#root.methodName")
+    @Caching(evict = {@CacheEvict("author"), @CacheEvict(value = "author", key = "#author.id")})
     public Author update(Author author) {
       Author author1 =   findById(author.getId());
       author1.setFullName(author.getFullName());
@@ -56,7 +74,8 @@ public class AuthorService extends BaseService<Author, Long> {
 //        return authorRepo.findByEmail(email);
 //   }
     @Async(value = "threadPoolTaskExecutor")
-public CompletableFuture<Author> findByEmail(String email) {
-    return CompletableFuture.completedFuture(authorRepo.findByEmail(email).get());
-}
+    @Cacheable(value = "findByEmailCache", key = "#email")
+    public CompletableFuture<Author> findByEmail(String email) {
+        return CompletableFuture.completedFuture(authorRepo.findByEmail(email).get());
+    }
 }

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @MappedSuperclass
 @Getter
@@ -28,12 +29,12 @@ public abstract class BaseEntity<ID> {
     private String createdBy;
 
     @CreatedDate
-    private LocalDateTime createdDate;
+    private Date createdDate;
 
     @LastModifiedBy
     private String lastModifiedBy;
 
     @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
+    private Date lastModifiedDate;
 
 }

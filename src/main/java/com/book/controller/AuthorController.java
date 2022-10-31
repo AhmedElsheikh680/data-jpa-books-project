@@ -39,7 +39,7 @@ public class AuthorController {
             @ApiResponse(responseCode = "400", description = "Invalid ID Supplied",content = @Content),
             @ApiResponse(responseCode = "404", description = "Author Not Found", content = @Content)
     })
-    public ResponseEntity<?> findById(@Parameter(example = "20", name = "Author ID") @Min(value = 20) @Max(value = 50)@PathVariable  Long id) {
+    public ResponseEntity<?> findById(@Parameter(example = "20", name = "Author ID") @Min(value = 1) @Max(value = 50)@PathVariable  Long id) {
 
         return ResponseEntity.ok(authorService.findById(id));
     }
@@ -50,7 +50,7 @@ public class AuthorController {
         return ResponseEntity.ok(authorService.findAll());
     }
 
-    @GetMapping("/author/{email}")
+    @GetMapping("/email/{email}")
     @Operation(summary = "Find Author By Email")
     public ResponseEntity<?> findByEmail(@PathVariable String email) {
         return ResponseEntity.ok(authorService.findByEmail(email));

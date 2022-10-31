@@ -51,18 +51,18 @@ public class Author extends BaseEntity<Long> {
     private String imagePath;
 
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Book> books = new ArrayList<>();
+//    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private List<Book> books = new ArrayList<>();
 
 
 
     //Create Helper Method (add-delete) instrad of getter wi setter
-    public void addBook(Book book) {
-        books.add(book);
-    }
-
-    public void deleteBook(Book book) {
-        books.remove(book);
-    }
+//    public void addBook(Book book) {
+//        books.add(book);
+//    }
+//
+//    public void deleteBook(Book book) {
+//        books.remove(book);
+//    }
 }
