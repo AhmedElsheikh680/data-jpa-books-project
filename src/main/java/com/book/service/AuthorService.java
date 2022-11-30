@@ -44,14 +44,14 @@ public class AuthorService extends BaseService<Author, Long> {
     public Author save(Author author) {
         if (!author.getEmail().isEmpty() || author.getEmail()!=null) {
 //            Optional<Author> author1 = findByEmail(author.getEmail());
-            CompletableFuture<Author> author1 = findByEmail(author.getEmail());
+            Optional<Author> author1 = findByEmail(author.getEmail());
 
             logger.info("Author Name Is {} And Email Is {}", author.getFullName(), author.getEmail());
 //            if (author1.isPresent()) {
-            if (author1.isDone()) {
-                logger.error("This Email Already Exist!!");
-                throw new DuplicateRecordException("This Email Already Exist!!");
-            }
+//            if (author1.isDone()) {
+//                logger.error("This Email Already Exist!!");
+//                throw new DuplicateRecordException("This Email Already Exist!!");
+//            }
         }
         return super.save(author);
     }
@@ -73,9 +73,10 @@ public class AuthorService extends BaseService<Author, Long> {
 //   public Optional<Author> findByEmail(String email) {
 //        return authorRepo.findByEmail(email);
 //   }
-    @Async(value = "threadPoolTaskExecutor")
-    @Cacheable(value = "findByEmailCache", key = "#email")
-    public CompletableFuture<Author> findByEmail(String email) {
-        return CompletableFuture.completedFuture(authorRepo.findByEmail(email).get());
+//    @Async(value = "threadPoolTaskExecutor")
+//    @Cacheable(value = "findByEmailCache", key = "#email")
+    public Optional<Author> findByEmail(String email) {
+//        return CompletableFuture.completedFuture(authorRepo.findByEmail(email).get());
+        return authorRepo.findByEmail(email);
     }
 }
